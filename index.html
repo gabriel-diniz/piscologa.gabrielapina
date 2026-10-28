@@ -113,7 +113,7 @@
     .brand-text { font-family: var(--font-head); font-size: 1.25rem; font-weight: 600; line-height: 1.15; }
     .brand-sub { display: block; font-family: var(--font-body); font-size: .66rem; letter-spacing: .32em; text-transform: uppercase; color: var(--accent-dark); font-weight: 600; margin-top: 2px; }
     .nav-menu { display: flex; align-items: center; gap: 30px; }
-    .nav-menu ul { display: flex; gap: 26px; }
+    .nav-menu ul { display: flex; gap: 24px; }
     .nav-menu a { font-size: .92rem; font-weight: 500; position: relative; padding: 6px 0; transition: color .3s ease; }
     .nav-menu a::after { content: ""; position: absolute; left: 0; bottom: 0; width: 0; height: 2px; background: var(--accent); border-radius: 2px; transition: width .3s ease; }
     .nav-menu a:hover::after { width: 100%; }
@@ -271,7 +271,7 @@
 <body>
   <a href="#inicio" class="skip-link">Pular para o conteúdo</a>
 
-  <a href="https://wa.me/5511988915658" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <a style="padding: 10px;" href="https://wa.me/5511988915658" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
     <i class="fab fa-whatsapp"></i>
   </a>
 
@@ -608,6 +608,13 @@
 
     window.addEventListener("scroll", function () {
       navbar.classList.toggle("scrolled", window.scrollY > 24);
+
+      // Se o menu estiver aberto e o usuário rolar a página, fecha o menu lentamente
+      if (navMenu.classList.contains("open") && window.scrollY > 10) {
+        navMenu.classList.remove("open");
+        navToggle.classList.remove("open");
+        navToggle.setAttribute("aria-expanded", "false");
+      }
     });
 
     navToggle.addEventListener("click", function () {
